@@ -25,7 +25,6 @@
   "homepage": "https://github.com/joshhedstrom/healthTracker#readme",
   "dependencies": {
     "axios": "^1.7.9",
-    "bcrypt": "^5.0.0",
     "bcrypt-nodejs": "0.0.3",
     "bcryptjs": "^2.4.3",
     "bluebird": "^3.5.2",
