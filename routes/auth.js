@@ -7,17 +7,28 @@ const jwt = require('jsonwebtoken');
 const router = express.Router();
 const User = require('../models/User.js');
 
-router.post('/register', (req, res) => {
-
+// Register route
+router.post('/register', async (req, res) => {
   console.log('register route reached');
 
   if (!req.body.username || !req.body.password) {
-    res.json({
+    return res.json({
       success: false,
       msg: 'Please pass username and password.'
     });
-  } else {
+  }
 
+  try {
+    // Check if user already exists
+    const existingUser = await User.findOne({ username: req.body.username });
+    if (existingUser) {
+      return res.json({
+        success: false,
+        msg: 'Username already exists.'
+      });
+    }
+
+    // Create new user
     let newUser = new User({
       username: req.body.username,
       password: req.body.password,
@@ -26,53 +37,57 @@ router.post('/register', (req, res) => {
       weight: req.body.weight
     });
 
-    newUser.save(err => {
-        if (err) {
-          return res.json({
-            success: false,
-            msg: 'Username already exists.'
-          });
-        } else {
-          res.json({
-            success: true,
-            msg: 'Successful created new user.'
-          });
-        };
-      } // end newUser.save
-
-    )}; // end else
+    // Save user to database
+    await newUser.save();
+    
+    res.json({
+      success: true,
+      msg: 'Successfully created new user.'
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      success: false,
+      msg: 'An error occurred while creating the user.',
+      error: err.message
+    });
+  }
 });
 
-router.post('/login', (req, res) => {
-  User.findOne({
-      username: req.body.username
-    },
-    (err, user) => {
-      if (err) throw err;
-      if (!user) {
-        res.status(401).send({
-          success: false,
-          msg: 'Authentication failed. User not found.'
-        });
-      } else {
-        user.comparePassword(req.body.password, (err, isMatch) => {
-          if (isMatch && !err) {
-            const token = jwt.sign(user.toJSON(), settings.secret);
-            res.json({
-              success: true,
-              token: 'JWT ' + token,
-              userId: user._id
-            });
-          } else {
-            res.status(401).send({
-              success: false,
-              msg: 'Authentication failed. Wrong password.'
-            });
-          }
-        });
-      }
+// Login route with async/await
+router.post('/login', async (req, res) => {
+  try {
+    const user = await User.findOne({ username: req.body.username });
+
+    if (!user) {
+      return res.status(401).send({
+        success: false,
+        msg: 'Authentication failed. User not found.'
+      });
     }
-  );
+
+    const isMatch = await user.comparePassword(req.body.password);
+
+    if (isMatch) {
+      const token = jwt.sign(user.toJSON(), settings.secret);
+      res.json({
+        success: true,
+        token: 'JWT ' + token,
+        userId: user._id
+      });
+    } else {
+      res.status(401).send({
+        success: false,
+        msg: 'Authentication failed. Wrong password.'
+      });
+    }
+  } catch (err) {
+    res.status(500).send({
+      success: false,
+      msg: 'An error occurred during login.',
+      error: err.message
+    });
+  }
 });
 
 module.exports = router;
