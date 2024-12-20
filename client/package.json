@@ -1,0 +1,36 @@
+{
+  "name": "health-tracker",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^1.4.1",
+    "@material-ui/icons": "^1.1.1",
+    "axios": "^0.18.1",
+    "chart.js": "^2.7.3",
+    "chartjs": "^0.3.24",
+    "jss": "^9.8.7",
+    "lodash": "^4.17.13",
+    "moment": "^2.22.2",
+    "react": "^16.6.0",
+    "react-chartjs-2": "^2.7.4",
+    "react-dom": "^16.6.0",
+    "react-fontawesome": "^1.6.1",
+    "react-router-dom": "^4.3.1",
+    "react-script": "^2.0.5",
+    "react-scripts": "1.1.4",
+    "start": "^5.1.0",
+    "switch": "0.0.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "proxy": "http://localhost:3001",
+  "root": "build/",
+  "clean_urls": false,
+  "routes": {
+    "/**": "index.html"
+  }
+}

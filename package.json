@@ -1,0 +1,46 @@
+{
+  "name": "healthtracker",
+  "version": "1.0.0",
+  "description": "A Fitness and Nutrition Tracking App",
+  "engines": {
+    "node": "8.11.1"
+  },
+  "main": "server.js",
+  "scripts": {
+    "client": "node scripts/start-client.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently \"nodemon server.js\" \"npm run client\"",
+    "build": "cd client && npm run build",
+    "heroku-postbuild": "cd client && npm install && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joshhedstrom/healthTracker.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joshhedstrom/healthTracker/issues"
+  },
+  "homepage": "https://github.com/joshhedstrom/healthTracker#readme",
+  "dependencies": {
+    "axios": "^0.18.1",
+    "bcrypt": "^5.0.0",
+    "bcrypt-nodejs": "0.0.3",
+    "bluebird": "^3.5.2",
+    "concurrently": "^3.6.1",
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.3.0",
+    "moment": "^2.22.2",
+    "mongoose": "^5.3.8",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.18.5",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0"
+  },
+  "root": "build/",
+  "clean_urls": false,
+  "routes": {
+    "/**": "index.html"
+  }
+}
