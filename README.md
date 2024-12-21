@@ -25,4 +25,4 @@ Then start the server:
 npm start
 ```
 
-And go to the [browser](http://localhost:3001) to view the application!
+And go to the [browser](http://localhost:3001) to view the application! (http://localhost:3001)
