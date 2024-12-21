@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A Fitness and Nutrition Tracking App",
   "engines": {
-    "node": "8.11.1"
+    "node": ">=20.0.0"
   },
   "main": "server.js",
   "scripts": {
