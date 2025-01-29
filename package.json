@@ -13,16 +13,6 @@
     "build": "cd client && npm run build",
     "heroku-postbuild": "cd client && npm install && npm run build"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/joshhedstrom/healthTracker.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/joshhedstrom/healthTracker/issues"
-  },
-  "homepage": "https://github.com/joshhedstrom/healthTracker#readme",
   "dependencies": {
     "axios": "^1.7.9",
     "bcrypt-nodejs": "0.0.3",
