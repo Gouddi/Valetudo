@@ -6,13 +6,7 @@
     "node": ">=20.0.0"
   },
   "main": "server.js",
-  "scripts": {
-    "client": "node scripts/start-client.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"nodemon server.js\" \"npm run client\"",
-    "build": "cd client && npm run build",
-    "heroku-postbuild": "cd client && npm install && npm run build"
-  },
+
   "dependencies": {
     "axios": "^1.7.9",
     "bcrypt-nodejs": "0.0.3",
